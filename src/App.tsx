@@ -1,4 +1,3 @@
-import React from 'react';
 import { Github, Heart, Code2, Settings2, Command, Download, Star, Coffee, BookOpen, Clock, Globe } from 'lucide-react';
 
 function App() {
