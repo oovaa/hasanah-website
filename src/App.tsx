@@ -21,7 +21,7 @@ function App() {
         <div className="container mx-auto px-6 py-20">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center gap-2 mb-4">
-              <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold">Version 9.2.1</span>
+              <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold">Version 9.3.0</span>
               <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold">MIT License</span>
             </div>
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
@@ -196,7 +196,13 @@ function App() {
   );
 }
 
-function FeatureCard({ icon, title, description }) {
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
       <div className="mb-4">{icon}</div>
