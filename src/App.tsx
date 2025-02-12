@@ -78,7 +78,7 @@ function App() {
             <div className="prose prose-emerald max-w-none">
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">About Hasanah</h2>
               <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                <h3 className="text-xl font-semibold mb-4">What's New in Version 9.2.1</h3>
+                <h3 className="text-xl font-semibold mb-4">What's New in Version 9.3.0</h3>
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-600">•</span>
