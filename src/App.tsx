@@ -1,4 +1,6 @@
 import { Github, Heart, Code2, Settings2, Command, Download, Star, Coffee, BookOpen, Clock, Globe } from 'lucide-react';
+import { Analytics } from "@vercel/analytics/react"
+
 
 function App() {
   return (
@@ -192,6 +194,8 @@ function App() {
           </div>
         </div>
       </footer>
+          <Analytics />
+      
     </div>
   );
 }
