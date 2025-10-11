@@ -26,3 +26,9 @@ export interface HadithResponse {
     book: string;
     number: number;
 }
+
+export interface GitHubRepoData {
+    stars: number;
+    lastUpdated: string;
+    version: string;
+}

@@ -19,6 +19,8 @@ import {
 } from 'lucide-react'
 import { Analytics } from '@vercel/analytics/react'
 import { useState, useEffect } from 'react'
+import { fetchGitHubRepoData } from './utils/github'
+import { GitHubRepoData } from './types'
 
 // Helper to get initial dark mode preference
 function getInitialDarkMode() {
@@ -30,10 +32,22 @@ function getInitialDarkMode() {
   return false // Default to false if window is not defined (SSR)
 }
 
+// Helper to format date
+function formatDate(dateString: string): string {
+  if (!dateString) return 'Loading...'
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
 function App() {
   const [darkMode, setDarkMode] = useState(getInitialDarkMode)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [githubData, setGithubData] = useState<GitHubRepoData>({
+    stars: 0,
+    lastUpdated: '',
+    version: '9.3.0'
+  })
 
   useEffect(() => {
     // Persist and apply dark mode
@@ -45,6 +59,15 @@ function App() {
       localStorage.setItem('darkMode', 'false')
     }
   }, [darkMode])
+
+  useEffect(() => {
+    // Fetch GitHub repository data
+    fetchGitHubRepoData().then(data => {
+      setGithubData(data)
+    }).catch(error => {
+      console.error('Failed to fetch GitHub data:', error)
+    })
+  }, [])
 
   useEffect(() => {
     // Handle scroll to update active section
@@ -259,8 +282,14 @@ function App() {
             <div className='max-w-3xl mx-auto text-center'>
               <div className='flex flex-wrap justify-center gap-2 mb-4'>
                 <span className='px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 rounded-full text-sm font-semibold'>
-                  Version 9.3.0
+                  Version {githubData.version}
                 </span>
+                {githubData.stars > 0 && (
+                  <span className='px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 rounded-full text-sm font-semibold flex items-center gap-1'>
+                    <Star size={14} className='fill-current' />
+                    {githubData.stars}
+                  </span>
+                )}
                 <span className='px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 rounded-full text-sm font-semibold'>
                   MIT License
                 </span>
@@ -316,10 +345,10 @@ function App() {
                     />
                   </div>
                   <h3 className='font-semibold mb-1 text-gray-800 dark:text-white'>
-                    Latest Release
+                    Last Updated
                   </h3>
                   <p className='text-sm text-gray-600 dark:text-gray-300'>
-                    February 4, 2025
+                    {formatDate(githubData.lastUpdated)}
                   </p>
                 </div>
                 <div className='text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors duration-300'>
