@@ -26,7 +26,7 @@ export async function fetchGitHubRepoData(): Promise<GitHubRepoData> {
             `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/tags`
         );
 
-        const latestTag = tags.length > 0 ? tags[0].name : '9.3.0';
+        const latestTag = tags.length > 0 ? tags[0].name : '10.0.2';
 
         return {
             stars: repoData.stargazers_count,
@@ -39,7 +39,7 @@ export async function fetchGitHubRepoData(): Promise<GitHubRepoData> {
         return {
             stars: 0,
             lastUpdated: new Date().toISOString(),
-            version: '9.3.0'
+            version: '10.0.2'
         };
     }
 }
